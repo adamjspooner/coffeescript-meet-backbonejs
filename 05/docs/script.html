@@ -1,0 +1,106 @@
+<!DOCTYPE html>  <html> <head>   <title>script.coffee</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>  <div id="jump_to"> Jump To &hellip;
+  <div id="jump_wrapper">
+    <div id="jump_page">
+      <a class="source" href="/01/docs/script.html"> Part 1 </a>
+      <a class="source" href="/02/docs/script.html"> Part 2 </a>
+      <a class="source" href="/03/docs/script.html"> Part 3 </a>
+      <a class="source" href="/04/docs/script.html"> Part 4 </a>
+      <a class="source" href="/05/docs/script.html"> Part 5 </a>
+    </div>
+  </div>
+</div>        <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               script.coffee             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <h2>Adding Actions to a View</h2>
+
+<p>Our models have been pretty lifeless so far. We'll attach some actions to 
+our <code>Item</code>s for some dynamic goodness. Take a look at 
+<a href="../">the implementation</a> before getting started.</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="nx">jQuery</span> <span class="o">-&gt;</span>
+  
+  <span class="k">class</span> <span class="nx">Item</span> <span class="k">extends</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span>
+    
+    <span class="nv">defaults:</span>
+      <span class="nv">part1: </span><span class="s1">&#39;Hello&#39;</span>
+      <span class="nv">part2: </span><span class="s1">&#39;Backbone&#39;</span>
+  
+  
+  <span class="k">class</span> <span class="nx">List</span> <span class="k">extends</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span>
+    
+    <span class="nv">model: </span><span class="nx">Item</span>
+  
+  
+  <span class="k">class</span> <span class="nx">ItemView</span> <span class="k">extends</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span>
+    
+    <span class="nv">tagName: </span><span class="s1">&#39;li&#39;</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p><code>initialize()</code> 
+binds <a href="http://documentcloud.github.com/backbone/#Model-change"><code>change</code></a> 
+and <a href="http://documentcloud.github.com/backbone/#Collection-remove"><code>remove</code></a> 
+to <code>@render</code> and <code>@unrender</code>, respectively.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">initialize: </span><span class="o">-&gt;</span>
+      <span class="nx">_</span><span class="p">.</span><span class="nx">bindAll</span> <span class="err">@</span>
+      
+      <span class="nx">@model</span><span class="p">.</span><span class="nx">bind</span> <span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="nx">@render</span>
+      <span class="nx">@model</span><span class="p">.</span><span class="nx">bind</span> <span class="s1">&#39;remove&#39;</span><span class="p">,</span> <span class="nx">@unrender</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p><code>render()</code> now includes two extra <code>span</code>s for swapping and deleting 
+an item.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">render: </span><span class="o">=&gt;</span>
+      <span class="nx">$</span><span class="p">(</span><span class="nx">@el</span><span class="p">).</span><span class="nx">html</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        &lt;span&gt;#{@model.get &#39;part1&#39;} #{@model.get &#39;part2&#39;}!&lt;/span&gt;</span>
+<span class="s2">        &lt;span class=&quot;</span><span class="nx">swap</span><span class="s2">&quot;&gt;swap&lt;/span&gt;</span>
+<span class="s2">        &lt;span class=&quot;</span><span class="k">delete</span><span class="s2">&quot;&gt;delete&lt;/span&gt;</span>
+<span class="s2">      &quot;&quot;&quot;</span>
+      <span class="err">@</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p><code>unrender()</code> removes the calling list item from the DOM. This uses 
+<a href="http://api.jquery.com/remove/">jQuery's <code>remove()</code> method</a>.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">unrender: </span><span class="o">=&gt;</span>
+      <span class="nx">$</span><span class="p">(</span><span class="nx">@el</span><span class="p">).</span><span class="nx">remove</span><span class="p">()</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p><code>swap()</code> interchanges an <code>Item</code>'s attributes. The <a href="http://documentcloud.github.com/backbone/#Model-set"><code>set()</code> model 
+function</a> triggers 
+the <code>change</code> event.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">swap: </span><span class="o">-&gt;</span>
+      <span class="nx">@model</span><span class="p">.</span><span class="nx">set</span>
+        <span class="nv">part1: </span><span class="nx">@model</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;part2&#39;</span>
+        <span class="nv">part2: </span><span class="nx">@model</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;part1&#39;</span>
+    
+    </pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p><code>remove()</code> calls the model's 
+<a href="http://documentcloud.github.com/backbone/#Model-destroy"><code>destroy()</code></a> 
+method, removing the model from its collection. <code>destroy()</code> would 
+normally delete the record from its persistent storage, but we'll 
+override this in <code>Backbone.sync</code> below.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">remove: </span><span class="o">-&gt;</span> <span class="nx">@model</span><span class="p">.</span><span class="nx">destroy</span><span class="p">()</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p><code>ItemView</code>s now respond to two click actions for each <code>Item</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">events:</span>
+      <span class="s1">&#39;click .swap&#39;</span><span class="o">:</span> <span class="s1">&#39;swap&#39;</span>
+      <span class="s1">&#39;click .delete&#39;</span><span class="o">:</span> <span class="s1">&#39;remove&#39;</span>
+  
+  </pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>We no longer need to modify the <code>ListView</code> because <code>swap</code> and <code>delete</code> are
+called on each <code>Item</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">class</span> <span class="nx">ListView</span> <span class="k">extends</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span>
+    
+    <span class="nv">el: </span><span class="nx">$</span> <span class="s1">&#39;body&#39;</span>
+    
+    <span class="nv">initialize: </span><span class="o">-&gt;</span>
+      <span class="nx">_</span><span class="p">.</span><span class="nx">bindAll</span> <span class="err">@</span>
+      
+      <span class="vi">@collection = </span><span class="k">new</span> <span class="nx">List</span>
+      <span class="nx">@collection</span><span class="p">.</span><span class="nx">bind</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="nx">@appendItem</span>
+      
+      <span class="vi">@counter = </span><span class="mi">0</span>
+      <span class="nx">@render</span><span class="p">()</span>
+    
+    <span class="nv">render: </span><span class="o">-&gt;</span>
+      <span class="nx">$</span><span class="p">(</span><span class="nx">@el</span><span class="p">).</span><span class="nx">append</span> <span class="s1">&#39;&lt;button&gt;Add Item List&lt;/button&gt;&#39;</span>
+      <span class="nx">$</span><span class="p">(</span><span class="nx">@el</span><span class="p">).</span><span class="nx">append</span> <span class="s1">&#39;&lt;ul&gt;&lt;/ul&gt;&#39;</span>
+    
+    <span class="nv">addItem: </span><span class="o">-&gt;</span>
+      <span class="nx">@counter</span><span class="o">++</span>
+      <span class="nv">item = </span><span class="k">new</span> <span class="nx">Item</span>
+      <span class="nx">item</span><span class="p">.</span><span class="nx">set</span> <span class="nv">part2: </span><span class="s2">&quot;#{item.get &#39;part2&#39;} #{@counter}&quot;</span>
+      <span class="nx">@collection</span><span class="p">.</span><span class="nx">add</span> <span class="nx">item</span>
+    
+    <span class="nv">appendItem: </span><span class="nf">(item) -&gt;</span>
+      <span class="nv">item_view = </span><span class="k">new</span> <span class="nx">ItemView</span> <span class="nv">model: </span><span class="nx">item</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">).</span><span class="nx">append</span> <span class="nx">item_view</span><span class="p">.</span><span class="nx">render</span><span class="p">().</span><span class="nx">el</span>
+    
+    <span class="nv">events: </span><span class="s1">&#39;click button&#39;</span><span class="o">:</span> <span class="s1">&#39;addItem&#39;</span>
+  
+  </pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>We'll override 
+<a href="http://documentcloud.github.com/backbone/#Sync"><code>Backbone.sync</code></a> since 
+we're not making any calls to the server when we change our model. </p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">Backbone.sync = </span><span class="nf">(method, model, success, error) -&gt;</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>Perform a NOOP when we successfully change our model. In our example,
+this will happen when we remove each Item view.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">success</span><span class="p">()</span>
+  
+  
+  <span class="nv">list_view = </span><span class="k">new</span> <span class="nx">ListView</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

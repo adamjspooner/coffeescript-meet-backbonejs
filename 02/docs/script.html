@@ -1,0 +1,36 @@
+<!DOCTYPE html>  <html> <head>   <title>script.coffee</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>  <div id="jump_to"> Jump To &hellip;
+  <div id="jump_wrapper">
+    <div id="jump_page">
+      <a class="source" href="/01/docs/script.html"> Part 1 </a>
+      <a class="source" href="/02/docs/script.html"> Part 2 </a>
+      <a class="source" href="/03/docs/script.html"> Part 3 </a>
+      <a class="source" href="/04/docs/script.html"> Part 4 </a>
+      <a class="source" href="/05/docs/script.html"> Part 5 </a>
+    </div>
+  </div>
+</div>        <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               script.coffee             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <h2>Binding DOM Events to View Methods</h2>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>So, <a href="/01/docs/script.html">part one</a> was pretty boring. Let's spice it up by 
+binding DOM events to our view's methods. <a href="../">The implementation</a> of this 
+step is slighlty more exciting than the last.</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="nx">jQuery</span> <span class="o">-&gt;</span>
+  
+  <span class="k">class</span> <span class="nx">ListView</span> <span class="k">extends</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span>
+    
+    <span class="nv">el: </span><span class="nx">$</span> <span class="s1">&#39;body&#39;</span>
+    
+    <span class="nv">initialize: </span><span class="o">-&gt;</span>
+      <span class="nx">_</span><span class="p">.</span><span class="nx">bindAll</span> <span class="err">@</span>
+      <span class="vi">@counter = </span><span class="mi">0</span>
+      <span class="nx">@render</span><span class="p">()</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>We'll add a button and an empty list to our view.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">render: </span><span class="o">-&gt;</span>
+      <span class="nx">$</span><span class="p">(</span><span class="nx">@el</span><span class="p">).</span><span class="nx">append</span> <span class="s1">&#39;&lt;button&gt;Add List Item&lt;/button&gt;&#39;</span>
+      <span class="nx">$</span><span class="p">(</span><span class="nx">@el</span><span class="p">).</span><span class="nx">append</span> <span class="s1">&#39;&lt;ul&gt;&lt;/ul&gt;&#39;</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p><code>addItem()</code> will be called via the <code>click</code> event on the button we added
+in our <code>render</code> method.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">addItem: </span><span class="o">-&gt;</span>
+      <span class="nx">@counter</span><span class="o">++</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">).</span><span class="nx">append</span> <span class="s2">&quot;&lt;li&gt;Hello, Backbone #{@counter}!&lt;/li&gt;&quot;</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p><a href="http://documentcloud.github.com/backbone/#View-delegateEvents"><code>events</code></a> 
+is a JSON object where DOM events are bound to view methods. Backbone 
+doesn't have a separate controller to handle event bindings; it all
+happens in a view.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">events: </span><span class="s1">&#39;click button&#39;</span><span class="o">:</span> <span class="s1">&#39;addItem&#39;</span>
+  
+  
+  <span class="nv">list_view = </span><span class="k">new</span> <span class="nx">ListView</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>Onward to <a href="/03/docs/script.html">Part 3</a>.</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
