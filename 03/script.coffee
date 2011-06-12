@@ -70,4 +70,4 @@ jQuery ->
   
   list_view = new ListView
 
-# Onward to [Part 4](/coffeescript-meet-backbonejs/04/docs/script.html)
+# Onward to [Part 4](/coffeescript-meet-backbonejs/04/docs/script.html).
