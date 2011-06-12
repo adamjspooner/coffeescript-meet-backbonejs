@@ -1,0 +1,71 @@
+<!DOCTYPE html>  <html> <head>   <title>script.coffee</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>  <div id="jump_to"> Jump To &hellip;
+  <div id="jump_wrapper">
+    <div id="jump_page">
+      <a class="source" href="/01/docs/script.html"> Part 1 </a>
+      <a class="source" href="/02/docs/script.html"> Part 2 </a>
+      <a class="source" href="/03/docs/script.html"> Part 3 </a>
+      <a class="source" href="/04/docs/script.html"> Part 4 </a>
+      <a class="source" href="/05/docs/script.html"> Part 5 </a>
+    </div>
+  </div>
+</div>        <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               script.coffee             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <h2>Using a Dedicated View for a Model</h2>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>We added a model and collection in the 
+<a href="/03/docs/script.html">previous example</a>, but our main application view 
+still held the structure for our model. We'll add a dedicated view, 
+<code>ItemView</code>, for our <code>Item</code> model. <a href="../">The implementation</a> for this part 
+looks exactly the same as the <a href="/03/">implementation of Part 3</a>.</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="nx">jQuery</span> <span class="o">-&gt;</span>
+  
+  <span class="k">class</span> <span class="nx">Item</span> <span class="k">extends</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span>
+    
+    <span class="nv">defaults:</span>
+      <span class="nv">part1: </span><span class="s1">&#39;Hello&#39;</span>
+      <span class="nv">part2: </span><span class="s1">&#39;Backbone&#39;</span>
+  
+  
+  <span class="k">class</span> <span class="nx">List</span> <span class="k">extends</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Collection</span>
+    
+    <span class="nv">model: </span><span class="nx">Item</span>
+  
+  </pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>The <code>ItemView</code> is now responsible for rendering each <code>Item</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">class</span> <span class="nx">ItemView</span> <span class="k">extends</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p><code>tagName</code> is used to create our
+<a href="http://documentcloud.github.com/backbone/#View-el"><code>@el</code></a>. You can also
+add <code>className</code> and <code>id</code> properties, but <code>tagName</code> is enough for this
+simple example.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">tagName: </span><span class="s1">&#39;li&#39;</span>
+    
+    <span class="nv">initialize: </span><span class="o">-&gt;</span>
+      <span class="nx">_</span><span class="p">.</span><span class="nx">bindAll</span> <span class="err">@</span>
+    
+    <span class="nv">render: </span><span class="o">-&gt;</span>
+      <span class="nx">$</span><span class="p">(</span><span class="nx">@el</span><span class="p">).</span><span class="nx">html</span> <span class="s2">&quot;&lt;span&gt;#{@model.get &#39;part1&#39;} #{@model.get &#39;part2&#39;}!&lt;/span&gt;&quot;</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>Returning <code>@</code> is considered a good practice. It let's us chain method 
+calls (i.e., <code>item_view.render().el</code>).</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="err">@</span>
+  
+  
+  <span class="k">class</span> <span class="nx">ListView</span> <span class="k">extends</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span>
+    
+    <span class="nv">el: </span><span class="nx">$</span> <span class="s1">&#39;body&#39;</span>
+    
+    <span class="nv">initialize: </span><span class="o">-&gt;</span>
+      <span class="nx">_</span><span class="p">.</span><span class="nx">bindAll</span> <span class="err">@</span>
+      
+      <span class="vi">@collection = </span><span class="k">new</span> <span class="nx">List</span>
+      <span class="nx">@collection</span><span class="p">.</span><span class="nx">bind</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="nx">@appendItem</span>
+      
+      <span class="vi">@counter = </span><span class="mi">0</span>
+      <span class="nx">@render</span><span class="p">()</span>
+    
+    <span class="nv">render: </span><span class="o">-&gt;</span>
+      <span class="nx">$</span><span class="p">(</span><span class="nx">@el</span><span class="p">).</span><span class="nx">append</span> <span class="s1">&#39;&lt;button&gt;Add List Item&lt;/button&gt;&#39;</span>
+      <span class="nx">$</span><span class="p">(</span><span class="nx">@el</span><span class="p">).</span><span class="nx">append</span> <span class="s1">&#39;&lt;ul&gt;&lt;/ul&gt;&#39;</span>
+    
+    <span class="nv">addItem: </span><span class="o">-&gt;</span>
+      <span class="nx">@counter</span><span class="o">++</span>
+      <span class="nv">item = </span><span class="k">new</span> <span class="nx">Item</span>
+      <span class="nx">item</span><span class="p">.</span><span class="nx">set</span> <span class="nv">part2: </span><span class="s2">&quot;#{item.get &#39;part2&#39;} #{@counter}&quot;</span>
+      <span class="nx">@collection</span><span class="p">.</span><span class="nx">add</span> <span class="nx">item</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p><code>appendItem()</code> no longer renders an individual <code>Item</code>. Rendering is 
+delegated to the <code>render()</code> method of each <code>ItemView</code> instance.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nv">appendItem: </span><span class="nf">(item) -&gt;</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Instantiate a new <code>ItemView</code> using <code>item</code> as the <code>model</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="nv">item_view = </span><span class="k">new</span> <span class="nx">ItemView</span> <span class="nv">model: </span><span class="nx">item</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">).</span><span class="nx">append</span> <span class="nx">item_view</span><span class="p">.</span><span class="nx">render</span><span class="p">().</span><span class="nx">el</span>
+    
+    <span class="nv">events: </span><span class="s1">&#39;click button&#39;</span><span class="o">:</span> <span class="s1">&#39;addItem&#39;</span>
+  
+  
+  <span class="nv">list_view = </span><span class="k">new</span> <span class="nx">ListView</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>Onward to <a href="/05/docs/script.html">Part 5</a></p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
