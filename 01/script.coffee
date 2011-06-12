@@ -36,4 +36,4 @@ jQuery ->
   # Lastly, we instantiate our main app view.
   list_view = new ListView
 
-# Onward to [Part 2](/02/docs/script.html).
+# Onward to [Part 2](/coffeescript-meet-backbonejs/02/docs/script.html).

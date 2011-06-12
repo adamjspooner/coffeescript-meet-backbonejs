@@ -36,4 +36,4 @@ jQuery ->
   
   list_view = new ListView
 
-# Onward to [Part 3](/03/docs/script.html).
+# Onward to [Part 3](/coffeescript-meet-backbonejs/03/docs/script.html).
