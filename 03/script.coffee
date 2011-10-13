@@ -3,7 +3,7 @@
 # So far we've used the view as our view and model. We'll extend
 # Backbone.Model and Backbone.Collection to separate our model from our view.
 
-# You might want to [wiew the implementation](../) of this step before 
+# You might want to [view the implementation](../) of this step before 
 # diving in.
 
 #
