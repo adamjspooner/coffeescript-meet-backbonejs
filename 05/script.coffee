@@ -35,6 +35,8 @@ jQuery ->
     
     # `render()` now includes two extra `span`s for swapping and deleting 
     # an item.
+    # We've also used a fat arrow (=>) instead of a regular arrow (->) in
+    # order to specify the context of a callback.
     render: =>
       $(@el).html """
         <span>#{@model.get 'part1'} #{@model.get 'part2'}!</span>
@@ -45,6 +47,8 @@ jQuery ->
     
     # `unrender()` removes the calling list item from the DOM. This uses 
     # [jQuery's `remove()` method](http://api.jquery.com/remove/).
+    # We've also used a fat arrow (=>) instead of a regular arrow (->) in
+    # order to specify the context of a callback.
     unrender: =>
       $(@el).remove()
     
