@@ -23,9 +23,12 @@ jQuery ->
     
     # `addItem()` will be called via the `click` event on the button we added
     # in our `render` method.
+    # The @$ function runs queries scoped within the view's element. This
+    # allows us to be sure we are only adding to the 'ul' element within
+    # this view.
     addItem: ->
       @counter++
-      $('ul').append "<li>Hello, Backbone #{@counter}!</li>"
+      @$('ul').append "<li>Hello, Backbone #{@counter}!</li>"
     
     # [`events`](http://documentcloud.github.com/backbone/#View-delegateEvents) 
     # is a JSON object where DOM events are bound to view methods. Backbone 
