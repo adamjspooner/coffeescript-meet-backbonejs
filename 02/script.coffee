@@ -12,7 +12,7 @@ jQuery ->
     el: $ 'body'
     
     initialize: ->
-      _.bindAll @
+      _.bindAll @, 'render', 'addItem'
       @counter = 0
       @render()
     
