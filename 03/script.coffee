@@ -35,7 +35,7 @@ jQuery ->
     # [`add`](http://documentcloud.github.com/backbone/#Collection-add) event 
     # to the `appendItem()` method.
     initialize: ->
-      _.bindAll @
+      _.bindAll @, 'render', 'addItem', 'appendItem'
       
       @collection = new List
       @collection.bind 'add', @appendItem
