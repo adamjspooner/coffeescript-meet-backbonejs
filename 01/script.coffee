@@ -24,7 +24,7 @@ jQuery ->
     initialize: ->
       # We're using [Underscore.js's bindAll method](http://documentcloud.github.com/underscore/#bindAll) 
       # to bind all the view's methods to this instance of our view.
-      _.bindAll @
+      _.bindAll @, 'render'
       @render()
     
     # `render()` renders the view in `@el`. It must be called by the us; 
