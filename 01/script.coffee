@@ -27,7 +27,7 @@ jQuery ->
       _.bindAll @
       @render()
     
-    # `render()` renders the view in `@el`. It must be called by the us; 
+    # `render()` renders the view in `@el`. It must be called by us; 
     # we called it at the end of our `initialize()` function.
     render: ->
       $(@el).append '<ul><li>Hello, Backbone!</li></ul>'
